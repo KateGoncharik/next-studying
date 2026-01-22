@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { ReactNode } from 'react';
 import ThemeProvider from '@/context/Theme';
+import { Toaster } from '@/components/ui/sonner';
 
 const inter = localFont({
   src: './fonts/Inter-VF.ttf',
@@ -25,11 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -43,7 +40,10 @@ export default function RootLayout({
         >
           <main className="min-h-screen">{children}</main>
         </ThemeProvider>
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

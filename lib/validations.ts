@@ -1,44 +1,51 @@
 import { z } from 'zod';
 
 export const SignInSchema = z.object({
-  email: z.string({ error: 'Email is required' }).min(1),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required.' })
+    .email({ message: 'Please provide a valid email address.' }),
+
   password: z
     .string()
-    .min(6, { error: 'Password must be at least 6 characters long.' })
-    .max(20, { error: 'Password cannot exceed 20 characters.' }),
+    .min(6, { message: 'Password must be at least 6 characters long.' })
+    .max(100, { message: 'Password cannot exceed 100 characters.' }),
 });
 
 export const SignUpSchema = z.object({
   username: z
     .string()
-    .min(1, { error: 'Username must be at least 3 characters long.' })
-    .max(15, { error: 'Username cannot exceed 15 characters.' })
+    .min(3, { message: 'Username must be at least 3 characters long.' })
+    .max(30, { message: 'Username cannot exceed 30 characters.' })
     .regex(/^[a-zA-Z0-9_]+$/, {
-      error: 'Username can only contain letters, numbers and underscores',
-    }),
-  name: z
-    .string()
-    .min(1, { error: 'Name is required.' })
-    .max(15, { error: 'Name cannot exceed 15 characters.' })
-    .regex(/^[a-zA-Z\s]+$/, {
-      error: 'Name can only contain letters and spaces',
+      message: 'Username can only contain letters, numbers, and underscores.',
     }),
 
-  email: z.string({ error: 'Email is required' }).min(1),
+  name: z
+    .string()
+    .min(1, { message: 'Name is required.' })
+    .max(50, { message: 'Name cannot exceed 50 characters.' })
+    .regex(/^[a-zA-Z\s]+$/, {
+      message: 'Name can only contain letters and spaces.',
+    }),
+
+  email: z
+    .string()
+    .min(1, { message: 'Email is required.' })
+    .email({ message: 'Please provide a valid email address.' }),
+
   password: z
     .string()
-    .min(6, { error: 'Password must be at least 6 characters long.' })
-    .max(20, { error: 'Password cannot exceed 20 characters.' })
+    .min(6, { message: 'Password must be at least 6 characters long.' })
+    .max(100, { message: 'Password cannot exceed 100 characters.' })
     .regex(/[A-Z]/, {
-      error: 'Password must contain at least one uppercase letter',
+      message: 'Password must contain at least one uppercase letter.',
     })
-    .regex(/^[a-z]/, {
-      error: 'Password must contain at least one lowercase letter',
+    .regex(/[a-z]/, {
+      message: 'Password must contain at least one lowercase letter.',
     })
-    .regex(/^[0-9]/, {
-      error: 'Password must contain at least one digit',
-    })
-    .regex(/^[a-zA-Z0-9]/, {
-      error: 'Password must contain at least one special character',
+    .regex(/[0-9]/, { message: 'Password must contain at least one number.' })
+    .regex(/[^a-zA-Z0-9]/, {
+      message: 'Password must contain at least one special character.',
     }),
 });

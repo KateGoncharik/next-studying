@@ -32,7 +32,6 @@ interface AuthFormProps<T extends FieldValues> {
   defaultValues: T;
   onSubmit: (data: T) => Promise<{ success: boolean }>;
   formType: 'SIGN_IN' | 'SIGN_UP';
-  // formType: string;
 }
 
 export const AuthForm = <T extends FieldValues>({

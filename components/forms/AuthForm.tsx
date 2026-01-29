@@ -57,8 +57,6 @@ export const AuthForm = <T extends FieldValues>({
         className="mt-10 space-y-6"
         onSubmit={form.handleSubmit(handleSubmit)}
       >
-        {buttonText}
-
         {Object.keys(defaultValues).map((field) => {
           return (
             <FormField
@@ -107,7 +105,13 @@ export const AuthForm = <T extends FieldValues>({
           </p>
         ) : (
           <p>
-            Already have an account? <Link href={ROUTES.SIGNIN}>Sign in</Link>
+            Already have an account?{' '}
+            <Link
+              className="paragraph-semibold primary-text-gradient"
+              href={ROUTES.SIGNIN}
+            >
+              Sign in
+            </Link>
           </p>
         )}
       </form>

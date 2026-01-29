@@ -1,4 +1,4 @@
-import Navbar from '@/components/navigation/Navbar';
+import Navbar from '@/components/navigation/navbar/Navbar';
 import { ReactNode } from 'react';
 
 export default function RootLayout({

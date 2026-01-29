@@ -1,5 +1,4 @@
 import { auth, signOut } from '@/auth';
-import { Button } from '@/components/ui/button';
 import ROUTES from '@/constants/routes';
 
 const Home = async () => {
@@ -15,9 +14,7 @@ const Home = async () => {
           'use server';
           await signOut({ redirectTo: ROUTES.SIGNIN });
         }}
-      >
-        <Button type="submit">Log out</Button>
-      </form>
+      ></form>
     </div>
   );
 };

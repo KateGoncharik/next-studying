@@ -12,8 +12,12 @@ import ROUTES from '@/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 import NavLinks from './NavLinks';
+import { auth, signOut } from '@/auth';
+import { Button } from '@/components/ui/button';
 
-const MobileNavigation = () => {
+const MobileNavigation = async () => {
+  const session = await auth();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -45,22 +49,34 @@ const MobileNavigation = () => {
                 <NavLinks isMobileNav />
               </section>
             </SheetClose>
-            <div className="flex flex-col gap-3">
-              <SheetClose asChild>
-                <Link href={ROUTES.SIGNIN}>
-                  <div className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                    <span className="primary-text-gradient">Log In</span>
-                  </div>
-                </Link>
-              </SheetClose>
-              <SheetClose>
-                <Link href={ROUTES.SIGNUP}>
-                  <div className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg border px-4 py-3 shadow-none">
-                    Sigh Up
-                  </div>
-                </Link>
-              </SheetClose>
-            </div>
+            {session?.user ? (
+              <form
+                className="px-1 pt-[100px]"
+                action={async () => {
+                  'use server';
+                  await signOut({ redirectTo: ROUTES.SIGNIN });
+                }}
+              >
+                <Button type="submit">Log out</Button>
+              </form>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <SheetClose asChild>
+                  <Link href={ROUTES.SIGNIN}>
+                    <div className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+                      <span className="primary-text-gradient">Log In</span>
+                    </div>
+                  </Link>
+                </SheetClose>
+                <SheetClose>
+                  <Link href={ROUTES.SIGNUP}>
+                    <div className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg border px-4 py-3 shadow-none">
+                      Sigh Up
+                    </div>
+                  </Link>
+                </SheetClose>
+              </div>
+            )}
           </div>
           <p className="h2-bold font-space-grotesk text-dark-100 dark:text-light-900">
             Dev<span className="text-primary-500">Flow</span>

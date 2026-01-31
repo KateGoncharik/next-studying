@@ -1,22 +1,10 @@
-import { auth, signOut } from '@/auth';
-import ROUTES from '@/constants/routes';
+import { auth } from '@/auth';
 
 const Home = async () => {
   const session = await auth();
   console.log(session);
 
-  return (
-    <div>
-      <h1 className="h1-bold text-light-500">Tailwind CSS is FUN!!</h1>
-      <form
-        className="px-1 pt-[100px]"
-        action={async () => {
-          'use server';
-          await signOut({ redirectTo: ROUTES.SIGNIN });
-        }}
-      ></form>
-    </div>
-  );
+  return <div>Test text</div>;
 };
 
 export default Home;

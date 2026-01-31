@@ -1,3 +1,4 @@
+import DesktopNavigation from '@/components/navigation/navbar/DesktopNavigation';
 import Navbar from '@/components/navigation/navbar/Navbar';
 import { ReactNode } from 'react';
 
@@ -9,7 +10,11 @@ export default function RootLayout({
   return (
     <main>
       <Navbar></Navbar>
-      {children}
+      <div className="flex pt-25">
+        <div className="flex flex-col"></div>
+        <DesktopNavigation />
+        {children}
+      </div>
     </main>
   );
 }

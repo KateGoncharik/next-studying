@@ -1,4 +1,4 @@
-import DesktopNavigation from '@/components/navigation/navbar/DesktopNavigation';
+import LeftSidebar from '@/components/navigation/LeftSidebar';
 import Navbar from '@/components/navigation/navbar/Navbar';
 import { ReactNode } from 'react';
 
@@ -8,12 +8,13 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <main>
-      <Navbar></Navbar>
-      <div className="flex pt-25">
-        <div className="flex flex-col"></div>
-        <DesktopNavigation />
-        {children}
+    <main className="background-light850_dark100 relative">
+      <Navbar />
+      <div className="flex">
+        <LeftSidebar />
+        <section className="flex min-h-screen flex-1 flex-col px-6 pb-6 pt-36 max-md:pd-14 sm:px-14">
+          <div>{children}</div>
+        </section>
       </div>
     </main>
   );

@@ -1,0 +1,30 @@
+import ROUTES from '@/constants/routes';
+import Link from 'next/link';
+import { Badge } from '../ui/badge';
+import { getDevIconClassname } from '@/lib/utils';
+
+interface Props {
+  id: string;
+  name: string;
+  questions: string;
+  showCount?: boolean;
+  compact?: boolean;
+}
+const TagCard = ({ id, name, questions, showCount, compact }: Props) => {
+  const iconClass = getDevIconClassname(name);
+  return (
+    <Link href={ROUTES.TAGS(id)} className="flex justify-between gap-2">
+      <Badge className="background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase">
+        <div className="flex-center space-x-2">
+          <i className={`${iconClass} text-sm`}></i>
+          <span>{name}</span>
+        </div>
+      </Badge>
+      {showCount && (
+        <p className="small-medium text-dark500_light700">{questions}</p>
+      )}
+    </Link>
+  );
+};
+
+export default TagCard;

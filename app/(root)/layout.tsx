@@ -1,5 +1,6 @@
 import LeftSidebar from '@/components/navigation/LeftSidebar';
 import Navbar from '@/components/navigation/navbar/Navbar';
+import RightSidebar from '@/components/navigation/RightSidebar';
 import { ReactNode } from 'react';
 
 export default function RootLayout({
@@ -15,6 +16,7 @@ export default function RootLayout({
         <section className="flex min-h-screen flex-1 flex-col px-6 pb-6 pt-36 max-md:pd-14 sm:px-14">
           <div>{children}</div>
         </section>
+        <RightSidebar />
       </div>
     </main>
   );
